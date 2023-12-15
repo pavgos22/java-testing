@@ -2,6 +2,7 @@ package com.functional.stream;
 
 import com.functional.stream.beautifier.PoemBeautifier;
 import com.functional.stream.beautifier.PoemDecorator;
+import com.functional.stream.iterate.NumbersGenerator;
 import com.functional.stream.lambda.*;
 import com.functional.stream.reference.FunctionalCalculator;
 
@@ -30,5 +31,8 @@ public class StreamMain {
         poemBeautifier.beautify("Apple", (s) -> s.repeat(2));
         poemBeautifier.beautify("Bulb", s -> s.substring(0, 1).toUpperCase() + s.substring(1));
         poemBeautifier.beautify("Table", (s) -> "ABC" + s.concat("ABC"));
+
+        System.out.println("Using Stream to generate even numbers from 1 to 20");
+        NumbersGenerator.generateEven(20);
     }
 }
