@@ -20,6 +20,10 @@ public class Main {
 
         while(true) {
             game.calculateMove(computer.move());
+            if (player.getMove() == null)
+                break;
         }
+
+        GlobalScanner.closeScanner();
     }
 }

@@ -46,18 +46,41 @@ public class Player {
     public Unit move() {
         Game.playerMoveText();
         Scanner input = GlobalScanner.getScanner();
-        char choice = input.nextLine().charAt(0);
-        System.out.println();
-        return switch (choice) {
-            case '1' -> {move = "Rock"; yield new Rock();}
-            case '2' -> {move = "Paper"; yield new Paper();}
-            case '3' -> {move = "Scissors"; yield new Scissors();}
-            case 'x' -> {System.out.println("Are you sure you want to exit the program?\nPress y(yes) or n(no)");
-                Scanner in = new Scanner(System.in);
-                char confirmation = in.nextLine().charAt(0);
-            yield null;}
 
-            default -> null;
-        };
+        while (true) {
+            char choice = input.nextLine().charAt(0);
+            System.out.println();
+
+            switch (choice) {
+                case '1' -> {
+                    move = "Rock";
+                    return new Rock();
+                }
+                case '2' -> {
+                    move = "Paper";
+                    return new Paper();
+                }
+                case '3' -> {
+                    move = "Scissors";
+                    return new Scissors();
+                }
+                case 'x' -> {
+                    while (true) {
+                        System.out.println("Are you sure you want to exit the program?\nPress y(yes) or n(no)");
+                        char confirmation = input.nextLine().charAt(0);
+
+                        if (confirmation == 'y') {
+                            return null;
+                        } else if (confirmation == 'n') {
+                            break;
+                        } else {
+                            System.out.println("Invalid input. Please press y or n.");
+                        }
+                    }
+                }
+                default -> System.out.println("Invalid input. Please enter 1, 2, 3, or x.");
+            }
+            Game.playerMoveText();
+        }
     }
 }
