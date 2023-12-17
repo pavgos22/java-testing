@@ -9,6 +9,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/java-rts" />
             <option value="$PROJECT_DIR$/java-stream" />
             <option value="$PROJECT_DIR$/junit-testing" />
           </set>

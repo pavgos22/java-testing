@@ -1,4 +1,4 @@
-package org.example;
+package com.projects.rts;
 
 public class Main {
     public static void main(String[] args) {
