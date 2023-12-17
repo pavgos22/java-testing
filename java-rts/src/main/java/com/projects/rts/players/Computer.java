@@ -11,6 +11,12 @@ public class Computer {
     private String move;
     private final String name = "Computer";
 
+    public int getPoints() {
+        return points;
+    }
+
+    private int points = 0;
+
     public String getMove() {
         return move;
     }
@@ -28,5 +34,9 @@ public class Computer {
 
     public String getName() {
         return this.name;
+    }
+
+    public void addPoints() {
+        this.points++;
     }
 }
