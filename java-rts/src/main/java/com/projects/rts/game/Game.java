@@ -2,16 +2,19 @@ package com.projects.rts.game;
 
 import com.projects.rts.players.Computer;
 import com.projects.rts.players.Player;
-import com.projects.rts.units.Paper;
-import com.projects.rts.units.Rock;
-import com.projects.rts.units.Scissors;
 import com.projects.rts.units.Unit;
 
 public class Game {
     private Player player1;
     private Computer computer;
+
+    public Game(Player player1, Computer computer) {
+        this.player1 = player1;
+        this.computer = computer;
+    }
+
     public static void playerMoveText() {
-        System.out.println("Enter your move (1 for Rock, 2 for Paper, 3 for Scissors, x to exit): ");
+        System.out.print("Enter your move (1 for Rock, 2 for Paper, 3 for Scissors, x to exit): ");
     }
 
     public void moveText () {
@@ -29,8 +32,10 @@ public class Game {
     }
 
     public void score() {
-        System.out.println(player1.getName() + "[" + player1.getPoints() + "]");
-        System.out.println(computer.getName() + "[" + computer.getPoints() + "]");
+        moveText();
+        System.out.println("*****Score*****");
+        System.out.println(player1.getName() + ": [" + player1.getPoints() + "]");
+        System.out.println(computer.getName() + ": [" + computer.getPoints() + "]");
     }
 
     public void win() {
@@ -39,12 +44,12 @@ public class Game {
         score();
     }
 
-    public void lose() {
+    public void draw() {
         System.out.println("Draw!");
         score();
     }
 
-    public void draw() {
+    public void lose() {
         System.out.println(computer.getName() + " wins");
         computer.addPoints();
         score();

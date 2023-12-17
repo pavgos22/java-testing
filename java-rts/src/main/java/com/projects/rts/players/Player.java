@@ -1,9 +1,11 @@
 package com.projects.rts.players;
 
+import com.projects.rts.game.Game;
 import com.projects.rts.units.Paper;
 import com.projects.rts.units.Rock;
 import com.projects.rts.units.Scissors;
 import com.projects.rts.units.Unit;
+import com.projects.rts.utils.GlobalScanner;
 
 import java.util.Scanner;
 
@@ -42,9 +44,10 @@ public class Player {
     }
 
     public Unit move() {
-        System.out.println("Enter your move (1 for Rock, 2 for Paper, 3 for Scissors, x to exit): ");
-        Scanner input = new Scanner(System.in);
+        Game.playerMoveText();
+        Scanner input = GlobalScanner.getScanner();
         char choice = input.nextLine().charAt(0);
+        System.out.println();
         return switch (choice) {
             case '1' -> {move = "Rock"; yield new Rock();}
             case '2' -> {move = "Paper"; yield new Paper();}
