@@ -19,6 +19,10 @@ public class Player {
     private String move;
     private String name;
 
+    public void setMove(String move) {
+        this.move = move;
+    }
+
     public Player(String name) {
         this.name = name;
     }
@@ -41,6 +45,18 @@ public class Player {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    private Runnable resetGameCallback;
+
+    public void setResetGameCallback(Runnable callback) {
+        this.resetGameCallback = callback;
+    }
+
+    public void resetGame() {
+        if (resetGameCallback != null) {
+            resetGameCallback.run();
+        }
     }
 
     public Unit move() {
@@ -70,6 +86,7 @@ public class Player {
                         char confirmation = input.nextLine().charAt(0);
 
                         if (confirmation == 'y') {
+                            Game.setExit(true);
                             return null;
                         } else if (confirmation == 'n') {
                             break;
@@ -78,7 +95,10 @@ public class Player {
                         }
                     }
                 }
-                default -> System.out.println("Invalid input. Please enter 1, 2, 3, or x.");
+                case 'n' -> {
+                    resetGame();
+                }
+                default -> System.out.println("Invalid input. Please enter 1, 2, 3, n or x.");
             }
             Game.playerMoveText();
         }

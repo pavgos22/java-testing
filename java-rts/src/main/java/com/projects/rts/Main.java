@@ -18,12 +18,13 @@ public class Main {
         Game game = new Game(player, computer);
         System.out.println();
 
-        while(true) {
+        boolean shouldRun = true;
+        do {
             game.calculateMove(computer.move());
-            if (player.getMove() == null)
-                break;
-        }
-
+            if ((player.getMove().equals(null) || player.getMove().equals("")) && Game.isExit()) {
+                shouldRun = false;
+            }
+        } while (shouldRun);
         GlobalScanner.closeScanner();
     }
 }

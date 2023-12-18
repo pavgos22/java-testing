@@ -21,6 +21,10 @@ public class Computer {
         return move;
     }
 
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
     public Unit move() {
         Random rand = new Random();
         int randInt = rand.nextInt(3);
@@ -38,5 +42,9 @@ public class Computer {
 
     public void addPoints() {
         this.points++;
+    }
+
+    public void setMove(String move) {
+        this.move = move;
     }
 }
