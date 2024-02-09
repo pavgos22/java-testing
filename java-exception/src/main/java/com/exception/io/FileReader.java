@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 public class FileReader {
 
-    public void readFile() {
+    public void readFile() throws FileReaderException {
         ClassLoader classLoader = getClass().getClassLoader();
         File file = new File(classLoader.getResource("names.txt").getFile());
         Path path = Paths.get("tego-pliku-nie-ma.txt");
@@ -17,7 +17,10 @@ public class FileReader {
         try {
             Stream<String> fileLines = Files.lines(path);
         } catch (IOException e) {
-            System.out.println("Błąd odczytu pliku");
+            throw new FileReaderException();
+        }
+        finally {
+            System.out.println("finally");
         }
 
         System.out.println(file.getPath());
