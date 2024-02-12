@@ -5,3 +5,4 @@ include("java-rts")
 include("java-rts:java-exception")
 findProject(":java-rts:java-exception")?.name = "java-exception"
 include("java-exception")
+include("java-clean")

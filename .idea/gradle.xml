@@ -9,6 +9,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/java-clean" />
             <option value="$PROJECT_DIR$/java-exception" />
             <option value="$PROJECT_DIR$/java-rts" />
             <option value="$PROJECT_DIR$/java-rts/java-exception" />
