@@ -1,6 +1,4 @@
 package com.spring.javaspring.forum;
-import com.spring.javaspring.shape.Circle;
-import com.spring.javaspring.shape.Shape;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
