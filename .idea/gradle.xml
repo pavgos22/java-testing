@@ -16,6 +16,7 @@
             <option value="$PROJECT_DIR$/java-rts/java-exception" />
             <option value="$PROJECT_DIR$/java-spring" />
             <option value="$PROJECT_DIR$/java-spring-web" />
+            <option value="$PROJECT_DIR$/java-stream" />
             <option value="$PROJECT_DIR$/junit-testing" />
           </set>
         </option>

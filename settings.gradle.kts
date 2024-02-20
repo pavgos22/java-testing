@@ -6,5 +6,6 @@ findProject(":java-rts:java-exception")?.name = "java-exception"
 include("java-exception")
 include("java-clean")
 include("java-spring")
+include("java-stream")
 include("java-spring-web")
 include("java-patterns")
