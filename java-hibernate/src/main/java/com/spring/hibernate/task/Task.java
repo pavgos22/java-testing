@@ -9,6 +9,7 @@ import java.util.Date;
 @Table(name = "TASKS")
 public final class Task {
 
+    String[] names = new String[5];
     private int id;
     private String description;
     private Date created;
