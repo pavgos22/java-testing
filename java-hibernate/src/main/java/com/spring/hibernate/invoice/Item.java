@@ -89,7 +89,7 @@ public class Item {
     }
 
     @ManyToOne
-    @JoinColumn(name = "INVOICE_ID")
+    @JoinColumn(name = "INVOICE_ID", referencedColumnName = "INVOICE_ID")
     public Invoice getInvoice() {
         return invoice;
     }

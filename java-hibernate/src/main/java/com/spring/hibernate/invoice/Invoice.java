@@ -1,7 +1,5 @@
 package com.spring.hibernate.invoice;
 
-import com.spring.hibernate.task.Task;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;

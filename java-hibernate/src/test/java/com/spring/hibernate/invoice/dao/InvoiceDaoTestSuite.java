@@ -36,6 +36,9 @@ public class InvoiceDaoTestSuite {
 
         Invoice invoice1 = new Invoice("ABCDEF", itemList);
 
+        item1.setInvoice(invoice1);
+        item2.setInvoice(invoice1);
+
         invoiceDao.save(invoice1);
 
         //invoiceDao.deleteById(invoice1.getId());
