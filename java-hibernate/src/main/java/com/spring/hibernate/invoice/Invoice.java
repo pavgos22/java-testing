@@ -10,12 +10,12 @@ import java.util.List;
 public class Invoice {
     private int id;
     private String number;
-    private List<Item> items = new ArrayList<>();
+    private List<Item> items;
 
-    public Invoice(String number, List<Item> items) {
-        this.number = number;
-        this.items = items;
-    }
+//    public Invoice(String number, List<Item> items) {
+//        this.number = number;
+//        this.items = items;
+//    }
 
     public Invoice() {
 
@@ -47,7 +47,7 @@ public class Invoice {
             targetEntity = Item.class,
             mappedBy = "invoice",
             cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
+            fetch = FetchType.EAGER
     )
     public List<Item> getItems() {
         return items;
@@ -55,5 +55,14 @@ public class Invoice {
 
     public void setItems(List<Item> items) {
         this.items = items;
+    }
+
+    @Override
+    public String toString() {
+        return "Invoice{" +
+                "id=" + id +
+                ", number='" + number + '\'' +
+                ", items=" + items +
+                '}';
     }
 }

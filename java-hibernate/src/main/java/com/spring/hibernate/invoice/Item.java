@@ -89,12 +89,24 @@ public class Item {
     }
 
     @ManyToOne
-    @JoinColumn(name = "INVOICE_ID", referencedColumnName = "INVOICE_ID")
+    @JoinColumn(name = "INVOICE_ID", nullable = false)
     public Invoice getInvoice() {
         return invoice;
     }
 
     public void setInvoice(Invoice invoice) {
         this.invoice = invoice;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                ", value=" + value +
+                ", product=" + product +
+                '}';
     }
 }

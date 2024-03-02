@@ -34,12 +34,17 @@ public class InvoiceDaoTestSuite {
         itemList.add(item1);
         itemList.add(item2);
 
-        Invoice invoice1 = new Invoice("ABCDEF", itemList);
+        Invoice invoice1 = new Invoice();
+        invoice1.setNumber("XCXVX");
+        invoice1.setItems(itemList);
 
         item1.setInvoice(invoice1);
         item2.setInvoice(invoice1);
 
-        invoiceDao.save(invoice1);
+        Invoice save = invoiceDao.save(invoice1);
+
+        System.out.println(save.getItems());
+        System.out.println(invoiceDao.findById(invoice1.getId()).get().getItems());
 
         //invoiceDao.deleteById(invoice1.getId());
     }

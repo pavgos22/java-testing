@@ -3,7 +3,7 @@ package com.spring.javaspring.portfolio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class Board {
     private final TaskList toDoList;
     private final TaskList inProgressList;
