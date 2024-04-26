@@ -19,4 +19,7 @@ public class CreatedTrelloCard {
 
     @JsonProperty("badges")
     private Badges badges;
+
+    public CreatedTrelloCard(String number, String testTask, String url) {
+    }
 }
