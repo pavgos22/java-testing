@@ -3,14 +3,15 @@ package com.crud.tasks.service;
 import com.crud.tasks.domain.Mail;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class SimpleEmailServiceTest {
@@ -45,6 +46,33 @@ class SimpleEmailServiceTest {
     }
 
     @Test
+    void shouldSendEmailWithCc() {
+        // Given
+        Mail mail = new Mail("test@example.com", "cc@example.com", "Test subject", "Test message");
+
+        // When
+        simpleEmailService.send(mail);
+
+        // Then
+        ArgumentCaptor<SimpleMailMessage> mailMessageCaptor = ArgumentCaptor.forClass(SimpleMailMessage.class);
+        verify(javaMailSender, times(1)).send(mailMessageCaptor.capture());
+        SimpleMailMessage capturedMail = mailMessageCaptor.getValue();
+        assertEquals("cc@example.com", capturedMail.getCc()[0]);
+    }
+
+    @Test
+    void shouldNotSendEmailWhenMailToIsNull() {
+        // Given
+        Mail mail = new Mail(null, "cc@example.com", "Test subject", "Test message");
+
+        // When
+        simpleEmailService.send(mail);
+
+        // Then
+        verify(javaMailSender, never()).send(any(SimpleMailMessage.class));
+    }
+
+    @Test
     public void shouldSendEmailWithoutCcWhenCcIsNull() {
         //Given
         Mail mail = Mail.builder()
@@ -65,4 +93,6 @@ class SimpleEmailServiceTest {
         //Then
         verify(javaMailSender, times(1)).send(expectedMailMessage);
     }
+
+
 }

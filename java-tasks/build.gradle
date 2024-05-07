@@ -30,7 +30,7 @@ dependencies {
     implementation 'org.springdoc:springdoc-openapi-ui:1.6.6'
     runtimeOnly 'com.mysql:mysql-connector-j:8.3.0'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
-    //runtimeOnly 'mysql:mysql-connector-java'
+    runtimeOnly 'mysql:mysql-connector-java'
 
 
 }

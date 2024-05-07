@@ -7,6 +7,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import com.crud.tasks.domain.AttachmentsByType;
 
@@ -104,6 +105,34 @@ class TrelloClientTest {
 
         // Then
         assertTrue(trelloBoards.isEmpty(), "The returned list should be empty");
+    }
+
+    @Test
+    void shouldHandleRestClientException() {
+        // Given
+        URI uri = URI.create("http://fake-url.com");
+        when(trelloConfig.getTrelloApiEndpoint()).thenReturn("http://fake-url.com");
+        when(restTemplate.getForObject(uri, TrelloBoardDto[].class)).thenThrow(new RestClientException("Failed"));
+
+        // When
+        Exception exception = assertThrows(RestClientException.class, () -> trelloClient.getTrelloBoards());
+
+        // Then
+        assertEquals("Failed", exception.getMessage());
+    }
+
+    @Test
+    void shouldReturnEmptyListOnBadRequest() {
+        // Given
+        URI uri = URI.create("http://fake-url.com");
+        when(trelloConfig.getTrelloApiEndpoint()).thenReturn("http://fake-url.com");
+        when(restTemplate.getForObject(uri, TrelloBoardDto[].class)).thenReturn(null);
+
+        // When
+        List<TrelloBoardDto> result = trelloClient.getTrelloBoards();
+
+        // Then
+        assertTrue(result.isEmpty());
     }
 
 }

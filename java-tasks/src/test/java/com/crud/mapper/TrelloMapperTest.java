@@ -5,11 +5,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import com.crud.tasks.mapper.TrelloMapper;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TrelloMapperTest {
 
@@ -108,5 +109,70 @@ public class TrelloMapperTest {
         assertEquals("Description", mappedCardDto.getDescription());
         assertEquals("top", mappedCardDto.getPos());
         assertEquals("10", mappedCardDto.getListId());
+    }
+
+    @Test
+    void testMapToBoardEmptyList() {
+        List<TrelloBoardDto> emptyList = Collections.emptyList();
+        assertTrue(trelloMapper.mapToBoards(emptyList).isEmpty());
+    }
+
+    @Test
+    void testMapToBoardNonEmptyList() {
+        TrelloListDto listDto = new TrelloListDto("1", "ToDo", false);
+        TrelloBoardDto boardDto = new TrelloBoardDto("1", "Test Board", List.of(listDto));
+        List<TrelloBoard> boards = trelloMapper.mapToBoards(List.of(boardDto));
+
+        assertAll(
+                () -> assertEquals(1, boards.size()),
+                () -> assertEquals("Test Board", boards.get(0).getName()),
+                () -> assertEquals("ToDo", boards.get(0).getLists().get(0).getName())
+        );
+    }
+
+    @Test
+    void testMapToCardAndCardDto() {
+        // Map to Card
+        TrelloCardDto trelloCardDto = new TrelloCardDto("Task 1", "Description", "top", "listId");
+        TrelloCard trelloCard = trelloMapper.mapToCard(trelloCardDto);
+
+        assertAll(
+                () -> assertEquals("Task 1", trelloCard.getName()),
+                () -> assertEquals("Description", trelloCard.getDescription()),
+                () -> assertEquals("top", trelloCard.getPos()),
+                () -> assertEquals("listId", trelloCard.getListId())
+        );
+
+        // Map to CardDto
+        TrelloCardDto mappedTrelloCardDto = trelloMapper.mapToCardDto(trelloCard);
+        assertAll(
+                () -> assertEquals("Task 1", mappedTrelloCardDto.getName()),
+                () -> assertEquals("Description", mappedTrelloCardDto.getDescription()),
+                () -> assertEquals("top", mappedTrelloCardDto.getPos()),
+                () -> assertEquals("listId", mappedTrelloCardDto.getListId())
+        );
+    }
+
+    @Test
+    void testMapToBoardAndBoardDtoWithEmptyLists() {
+        // Map to Board with empty list
+        TrelloBoardDto trelloBoardDto = new TrelloBoardDto("1", "Test Board", new ArrayList<>());
+        List<TrelloBoard> mappedBoards = trelloMapper.mapToBoards(List.of(trelloBoardDto));
+
+        assertAll(
+                () -> assertEquals(1, mappedBoards.size()),
+                () -> assertEquals("Test Board", mappedBoards.get(0).getName()),
+                () -> assertTrue(mappedBoards.get(0).getLists().isEmpty())
+        );
+
+        // Map to BoardDto with empty list
+        TrelloBoard trelloBoard = new TrelloBoard("1", "Test Board", new ArrayList<>());
+        List<TrelloBoardDto> mappedBoardDtos = trelloMapper.mapToBoardsDto(List.of(trelloBoard));
+
+        assertAll(
+                () -> assertEquals(1, mappedBoardDtos.size()),
+                () -> assertEquals("Test Board", mappedBoardDtos.get(0).getName()),
+                () -> assertTrue(mappedBoardDtos.get(0).getLists().isEmpty())
+        );
     }
 }
