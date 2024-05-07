@@ -97,13 +97,13 @@ class TrelloFacadeTest {
         // Given
         TrelloCardDto trelloCardDto = new TrelloCardDto("Task", "Description", "top", "listId");
         TrelloCard trelloCard = new TrelloCard("Task", "Description", "top", "listId");
-        CreatedTrelloDto createdTrelloDto = new CreatedTrelloDto("1", "Task", "http://test.com", new Badges(10, attachmentsByType));
+        CreatedTrelloCardDto createdTrelloCardDto = new CreatedTrelloCardDto("1", "Task", "http://test.com", new Badges(10, attachmentsByType));
 
         when(trelloMapper.mapToCard(trelloCardDto)).thenReturn(trelloCard);
-        when(trelloService.createTrelloCard(trelloCardDto)).thenReturn(createdTrelloDto);
+        when(trelloService.createTrelloCard(trelloCardDto)).thenReturn(createdTrelloCardDto);
 
         // When
-        CreatedTrelloDto newCard = trelloFacade.createCard(trelloCardDto);
+        CreatedTrelloCardDto newCard = trelloFacade.createCard(trelloCardDto);
 
         // Then
         assertEquals("1", newCard.getId());

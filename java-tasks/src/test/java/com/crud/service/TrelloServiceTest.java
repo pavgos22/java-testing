@@ -42,12 +42,12 @@ class TrelloServiceTest {
     void shouldCreateTrelloCard() {
         // Given
         TrelloCardDto trelloCardDto = new TrelloCardDto("Task", "Description", "top", "listId");
-        CreatedTrelloDto createdTrelloDto = new CreatedTrelloDto("1", "Task", "http://test.com", new Badges(10, attachmentsByType));
+        CreatedTrelloCardDto createdTrelloCardDto = new CreatedTrelloCardDto("1", "Task", "http://test.com", new Badges(10, attachmentsByType));
 
-        when(trelloClient.createNewCard(trelloCardDto)).thenReturn(createdTrelloDto);
+        when(trelloClient.createNewCard(trelloCardDto)).thenReturn(createdTrelloCardDto);
 
         // When
-        CreatedTrelloDto newCard = trelloService.createTrelloCard(trelloCardDto);
+        CreatedTrelloCardDto newCard = trelloService.createTrelloCard(trelloCardDto);
 
         // Then
         assertNotNull(newCard);
